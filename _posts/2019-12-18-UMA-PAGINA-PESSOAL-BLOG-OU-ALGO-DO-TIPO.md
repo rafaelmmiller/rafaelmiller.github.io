@@ -1,7 +1,9 @@
+---
 layout: page
 title: "Uma página pessoal.. blog.. ou algo do tipo"
 date: 2019-12-18 18:00:00 -0000
-categories: Novidades Atualizações
+categories: [Novidades, Atualizações]
+---
 
 # Uma página pessoal.. blog.. ou algo do tipo
 *Usando github pages :)*
