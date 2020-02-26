@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Teste Chamada</title>
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+	<meta http-equiv="pragma" content="no-cache" />
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<button class="enviar">Enviar</button>
+	<br/>
+	<p><strong>Chamada Axios</strong></p>
+	<hr>
+	<pre class="caixa"></pre>
+	<br/>
+	<p><strong>Chamada JQuery</strong></p>
+	<hr>
+	<pre class="caixajquery"></pre>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+<script>
+
+var dataObj = {
+  "apikey": "zMfvAyOA7U3HxWEGJ4HvUpkKyUxNRT",
+  "aluno_nome": "Testando Endpoint, Aluno",
+  "aluno_idbrightspace": "aluno64523764237647-hydf36e-3862r687teste",
+  "quiz_titulo": "Quiz Teste Endpoint",
+  "quiz_filename": "quiz-teste-endpoint",
+  "quiz_questoes": [
+    {
+      "id_pergunta": "pergunta_1",
+      "pergunta": "<p>Na busca por resolver problemas e alcançar novos patamares de resultados sustentáveis, o conhecimento gerencial é fator decisivo de sobrevivência. É a estruturação do Sistema de Gestão visando alcançar resultados com o uso de métodos e ferramentas gerenciais que ajudarão na resolução de problemas complexos... A principal competência de um profissional hoje é a resolução de problemas. Você ainda está na tentativa e erro ou você já está diante do método?</p><p> <strong>Sobre conhecimento gerencial, pode- se dizer que:</strong></p><p><strong>I</strong> – O Sistema de Gestão permite melhorar o patamar de resultados, buscando a sobrevivência das Organizações, visando à concorrência e às necessidades do mercado.<br><strong>II</strong> – Uma correta aplicação das metodologias de Gestão permite mais que alcançar resultados, ter base para a manutenção desse patamar.<br><strong>III</strong> – Melhoria contínua é a prática adotada por diversas empresas que visa atingir resultados cada vez melhores, sejam eles nos produtos e serviços da empresa, ou então em seus processos internos.<br><strong>IV</strong> – O método é uma sequência lógica de ações, um caminho para se alcançar as metas.</p><p>Quais das afirmações acima estão <strong>corretas</strong>?</p>",
+      "selecao": "I e IV",
+      "acerto": 1,
+      "correta": "I e IV"
+    },
+    {
+      "id_pergunta": "pergunta_2",
+      "pergunta": "Quem pintou \"Guernica\"?",
+      "selecao": "Pablo Picasso",
+      "acerto": 1,
+      "correta": "Pablo Picasso"
+    },
+    {
+      "id_pergunta": "pergunta_3",
+      "pergunta": "Quanto tempo a luz do Sol demora para chegar à Terra?",
+      "selecao": "8 minutos",
+      "acerto": 1,
+      "correta": "8 minutos"
+    },
+    {
+      "id_pergunta": "pergunta_4",
+      "pergunta": "Quais os nomes dos três Reis Magos?",
+      "selecao": "Belchior, Gaspar e Baltazar",
+      "acerto": 1,
+      "correta": "Belchior, Gaspar e Baltazar"
+    },
+    {
+      "id_pergunta": "pergunta_5",
+      "pergunta": "Quem foi o primeiro homem a pisar na Lua? Em que ano aconteceu?",
+      "selecao": "Neils Armstrong, em 1969",
+      "acerto": 1,
+      "correta": "Neils Armstrong, em 1969"
+    }
+  ]
+}
+
+$( ".enviar" ).click(function() {
+	axios.post('https://us-central1-frst-260917.cloudfunctions.net/salvar-resposta-do-quiz', dataObj, { headers: {'Content-Type':'application/json' } } )
+		.then(function (response) {
+			console.log('sucesso_axios',response);
+			$( ".caixa" ).html(response);
+		})
+		.catch(function (error) {
+			console.log('error_axios',error);
+			$( ".caixa" ).html(error);
+		});
+
+	$.ajax({
+			url: 'https://us-central1-frst-260917.cloudfunctions.net/salvar-resposta-do-quiz',
+			method: 'POST',
+			data : dataObj,
+		}).done(function(response) {
+			console.log('sucesso_jquery',response);
+			$( ".caixajquery" ).html(JSON.stringify(response));
+		}).fail(function(error){
+			console.log('error_jquery',error)
+			$( ".caixajquery" ).html(JSON.stringify(error));
+		});
+});
+
+</script>
+</html>
