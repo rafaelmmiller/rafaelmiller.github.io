@@ -32,7 +32,7 @@ var dataObj = {
   "aluno_nome": "Testando Endpoint, Aluno",
   "aluno_idbrightspace": "aluno64523764237647-hydf36e-3862r687teste",
   "quiz_titulo": "Quiz Teste Endpoint",
-  "quiz_filename": "quiz-teste-endpoint",
+  "quiz_filename": "quiz-teste-endpoint.json",
   "quiz_questoes": [
     {
       "id_pergunta": "pergunta_1",
@@ -73,7 +73,7 @@ var dataObj = {
 }
 
 $( ".enviar" ).click(function() {
-	axios.post('https://us-central1-frst-260917.cloudfunctions.net/salvar-resposta-do-quiz', dataObj, { headers: {'Content-Type':'application/json' } } )
+	axios.post('https://us-central1-frst-260917.cloudfunctions.net/salvar-resposta-do-quiz', JSON.stringify(dataObj), { headers: {'Content-Type':'application/json' } } )
 		.then(function (response) {
 			console.log('sucesso_axios',response);
 			$( ".caixa" ).html(response);
@@ -86,7 +86,7 @@ $( ".enviar" ).click(function() {
 	$.ajax({
 			url: 'https://us-central1-frst-260917.cloudfunctions.net/salvar-resposta-do-quiz',
 			method: 'POST',
-			data : dataObj,
+			data : JSON.stringify(dataObj),
 		}).done(function(response) {
 			console.log('sucesso_jquery',response);
 			$( ".caixajquery" ).html(JSON.stringify(response));
